@@ -1,11 +1,30 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import NaviationsMobile from "../components/Mobile/NaviationsMobile.astro";
+import Nav from "../components/Mobile/nav.astro";
+import Layout from "../layouts/Layout.astro";
+import Home from "../components/Home.astro";
+import backgroundMovil from ".././assets/home/background-home-mobile.jpg";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+  <div class="container">
+    <Nav />
+    <NaviationsMobile />
+    <Home />
+  </div>
 </Layout>
+
+<style define:vars={{ bgUrl: `url(${backgroundMovil.src})` }}>
+  .container {
+    background-image: var(--bgUrl);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100dvh;
+    z-index: -1;
+  }
+</style>

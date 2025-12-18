@@ -1,0 +1,92 @@
+---
+import Nav from "../Mobile/nav.astro";
+---
+
+<nav class="nav">
+  <div class="navigations" id="main-nav">
+    <div class="close" id="close-btn">
+      <img src="/src/assets/close.svg" alt="Cerrar Menu" />
+    </div>
+    <div class="menu">
+      <ul>
+        <li><a href=""><span aria-hidden="true">00</span> INDEX</a></li>
+        <li><a href=""><span aria-hidden="true">01</span> DESTINATIONS</a></li>
+        <li><a href=""><span aria-hidden="true">02</span> CREW</a></li>
+        <li><a href=""><span aria-hidden="true">03</span> TECHNOLOGY</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    align-self: stretch;
+  }
+
+  .navigations {
+    display: flex;
+    flex-direction: column;
+    width: 254px;
+    height: 100vh;
+    padding-left: 32px;
+    align-items: flex-start;
+    position: fixed;
+    right: 0;
+    top: 0;
+    gap: 48px;
+    background-color: rgba(11, 13, 23, 0.15pointer);
+    backdrop-filter: blur(40px);
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    visibility: hidden;
+  }
+
+  .navigations.active {
+    transform: translateX(0%);
+    visibility: visible;
+  }
+
+  .close {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 0;
+    align-items: flex-end;
+    align-self: stretch;
+    justify-content: center;
+    padding-right: 20px;
+  }
+
+  .close img {
+    cursor: pointer;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .menu ul {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .menu a {
+    text-decoration: none;
+    color: var(--color-white);
+    font-weight: lighter;
+  }
+
+  .menu span {
+    font-weight: bold;
+  }
+</style>

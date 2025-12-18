@@ -1,0 +1,45 @@
+<nav class="nav">
+  <div class="logo">
+    <img src="/src/assets/logo.svg" alt="Logo" />
+  </div>
+
+  <div class="menu" id="menu-btn">
+    <img src="/src/assets/menu.svg" alt="Abrir Menu" />
+  </div>
+</nav>
+
+<style>
+  .nav {
+    display: flex;
+    padding: 24px 20px;
+    align-items: center;
+    align-self: stretch;
+    justify-content: space-between;
+    z-index: 999;
+  }
+
+  .menu {
+    display: block;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  const openBtn = document.getElementById("menu-btn");
+  const menu = document.getElementById("main-nav");
+  const closeBtn = document.getElementById("close-btn");
+
+  if (openBtn && menu) {
+    openBtn.addEventListener("click", () => {
+      menu.classList.add("active");
+      openBtn.style.display = "none";
+    });
+  }
+
+  if (closeBtn && menu) {
+    closeBtn.addEventListener("click", () => {
+      menu.classList.remove("active");
+      if (openBtn) openBtn.style.display = "block";
+    });
+  }
+</script>

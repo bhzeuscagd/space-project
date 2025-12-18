@@ -1,0 +1,130 @@
+:root {
+  /*paleta de colores*/
+  --color-white: #ffffff;
+  --blue-dark: #0b0d17;
+  --blue-ligth: #d0d6f9;
+
+  /*Tamño de fuentes*/
+  --font-primary: "Ballefair", sans-serif;
+  --font-primary-1: 144px;
+  --font-primary-2: 100px;
+  --font-primary-3: 56px;
+  --font-primary-4: 32px;
+  --font-primary-5: 28px;
+
+  --font-secondary: "Barlow Condensed", sans-serif;
+  --font-secondary-1: 28px;
+  --font-secondary-2: 16px;
+  --font-secondary-3: 14px;
+
+  --font-third: "Barlow", sans-serif;
+  --font-trird-1: 18px;
+
+  /*Espaciado y border*/
+}
+
+@font-face {
+  font-family: "Barlow";
+  src: url("/public/fonts/Barlow-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("/public/fonts/BarlowCondensed-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ballefair";
+  src: url("/public/fonts/Bellefair-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* 1. Box Sizing: EL MÁS IMPORTANTE */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Reset de márgenes y paddings básicos */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Configuración base del Body */
+body {
+  /* Ocupar siempre el 100% de la altura visible (útil para footers pegados abajo) */
+  min-height: 100vh;
+  /* Mejora la legibilidad del texto */
+  line-height: 1.5;
+  /* Suavizado de fuentes en Mac/iOS */
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--blue-dark);
+  color: var(--color-white);
+
+  font-family: var(--font-primary);
+}
+
+/* 4. Imágenes y Multimedia Responsivas por defecto */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block; /* Quita el espacio extraño debajo de las imágenes */
+  max-width: 100%; /* Evita que la imagen se salga de su contenedor (scroll horizontal) */
+}
+
+/* 5. Inputs y Botones que hereden la fuente */
+input,
+button,
+textarea,
+select {
+  font: inherit; /* Por defecto los inputs usan una fuente fea del sistema, esto lo arregla */
+}
+
+/* 6. Evitar desbordamiento de texto largo */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 7. (Opcional pero recomendado) Títulos balanceados */
+h1,
+h2,
+h3 {
+  /* Evita que quede una sola palabra huérfana en la segunda línea de un título */
+  text-wrap: balance;
+}
+
+ul {
+  list-style: none;
+}
+/* 8. Accesibilidad: Reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
