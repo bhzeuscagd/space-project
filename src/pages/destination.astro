@@ -1,0 +1,69 @@
+---
+import NaviationsMobile from "../components/Mobile/NaviationsMobile.astro";
+import Nav from "../components/Mobile/nav.astro";
+import Layout from "../layouts/Layout.astro";
+import DestinationsContent from "../components/DestinationsContent.astro";
+import backgroundDestinationMovil from ".././assets/destination/background-destination-mobile.jpg";
+import backgroundDestinationTablet from ".././assets/destination/background-destination-tablet.jpg";
+import backgroundDestinationDesktop from ".././assets/destination/background-destination-desktop.jpg";
+import ButtonsDesktop from "../components/Desktop/ButtonsDesktop.astro";
+---
+
+<Layout>
+  <div class="container-bg">
+    <div class="nav-mobile">
+      <Nav />
+    </div>
+    <div class="nav-desktop">
+      <ButtonsDesktop />
+    </div>
+    <NaviationsMobile />
+    <DestinationsContent />
+  </div>
+</Layout>
+
+<style
+  define:vars={{
+    bgUrl: `url(${backgroundDestinationMovil.src})`,
+    bgUrl2: `url(${backgroundDestinationTablet.src})`,
+    bgUrl3: `url(${backgroundDestinationDesktop.src})`,
+  }}
+>
+  .container-bg {
+    background-image: var(--bgUrl);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100dvh;
+    z-index: -1;
+  }
+
+  /**Logica desaparece y aparece el menu en mobile */
+  @media (max-width: 768px) {
+    .nav-mobile {
+      display: block;
+    }
+    .nav-desktop {
+      display: none;
+    }
+  }
+  @media (min-width: 768px) {
+    .nav-mobile {
+      display: none;
+    }
+    .nav-desktop {
+      display: block;
+    }
+
+    .container-bg {
+      background-image: var(--bgUrl2) !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-bg {
+      background-image: var(--bgUrl3) !important;
+    }
+  }
+</style>
