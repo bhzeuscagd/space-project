@@ -1,0 +1,178 @@
+---
+import datos from "../assets/Data/data.json";
+
+const { crew } = datos;
+
+const cleanId = (name: string) => name.toLowerCase().replace(/\s+/g, "-");
+
+import PaginationsDots from "../components/PaginationDots.astro";
+---
+
+<section class="crew">
+  <div class="main-title">
+    <h2>02 MEET YOUR CREW</h2>
+  </div>
+  {
+    crew.map(({ name, images, role, bio }, index) => (
+      <div class="crew-container" id={cleanId(name)} hidden={index !== 0}>
+        <div class="content-left">
+          <div class="info">
+            <h2>{role}</h2>
+            <h1>{name}</h1>
+            <p>{bio}</p>
+          </div>
+          <div class="nav">
+            <PaginationsDots />
+          </div>
+        </div>
+        <div class="content-right">
+          <div class="img-crew">
+            <img src={images.png} alt={name} />
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  /* Estilo para el título estático */
+  .main-title h2 {
+    font-family: var(--font-secondary);
+    font-weight: normal;
+    letter-spacing: 2.4px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .crew-container {
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .crew-container .content-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding-top: 24px;
+  }
+
+  .content-left .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .content-left .info h2 {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-size: var(--font-trird-1);
+    text-transform: uppercase;
+    line-height: normal;
+    font-feature-settings:
+      "liga" off,
+      "clig" off;
+  }
+
+  .content-left .info h1 {
+    font-family: var(--font-primary);
+    font-size: 24px;
+    text-transform: uppercase;
+    line-height: normal;
+  }
+  .content-left .info p {
+    font-family: var(--font-third);
+    font-size: 15px;
+    line-height: 180%;
+    text-align: center;
+    font-style: normal;
+    margin-top: 20px;
+  }
+  .content-left .nav {
+    margin-top: 40px;
+  }
+
+  .content-right img {
+    height: 340px;
+    width: auto;
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  }
+
+  .crew-container[hidden] {
+    display: none;
+  }
+  .crew-container:not([hidden]) {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  // seleccionamos los enlaces del dot
+
+  const links = document.querySelectorAll(".dot");
+
+  //seleccionamos los contenedores padres de cada profesional
+
+  const crewContainers = document.querySelectorAll(
+    ".crew-container"
+  ) as NodeListOf<HTMLElement>;
+
+  //escuchar los clics
+
+  //recorremos todos los botones y le asignamos los click
+
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      //evitar comportamiento por defecto
+
+      e.preventDefault();
+
+      //seguridad
+
+      const href = link.getAttribute("href");
+
+      if (!href) return;
+      //resetear
+      //actualizamos el menu
+      links.forEach((l) => l.classList.remove("active"));
+
+      //marcamos el nuevo
+      links.forEach((l) => {
+        if (l.getAttribute("href") === href) {
+          l.classList.add("active");
+        }
+      });
+
+      //cambiar el contenido
+      crewContainers.forEach((container) => {
+        container.hidden = true;
+      });
+
+      const targetId = href.substring(1);
+      console.log("Intentando abrir ID:", targetId); // Debug en consola
+
+      const targetContainer = document.getElementById(targetId);
+
+      if (targetContainer) {
+        targetContainer.hidden = false;
+      }
+    });
+  });
+</script>

@@ -1,0 +1,57 @@
+---
+import datos from "../assets/Data/data.json";
+
+const { crew } = datos;
+const cleanId = (name: string) => name.toLowerCase().replace(/\s+/g, "-");
+---
+
+<div class="dot-indicadors">
+  <a
+    href={`#${cleanId(crew[0].name)}`}
+    class="dot active"
+    aria-selected="true"
+    data-index="0"></a>
+  <a
+    href={`#${cleanId(crew[1].name)}`}
+    class="dot"
+    aria-selected="false"
+    data-index="1="></a>
+  <a
+    href={`#${cleanId(crew[2].name)}`}
+    class="dot"
+    aria-selected="false"
+    data-index="2"></a>
+  <a
+    href={`#${cleanId(crew[3].name)}`}
+    class="dot"
+    aria-selected="false"
+    data-index="3"></a>
+</div>
+
+<style>
+  .dot-indicadors {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .dot {
+    border: none;
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-white);
+    transition: background-color 0.3s ease;
+    opacity: 0.5;
+  }
+
+  .dot:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .dot.active {
+    background-color: var(--color-white);
+    opacity: 1;
+  }
+</style>

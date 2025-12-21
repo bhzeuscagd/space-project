@@ -1,0 +1,316 @@
+---
+import DostPaginations from "../components/Mobile/DotsPaginationsMobile.astro";
+import datos from "../assets/Data/data.json";
+
+const { destinations } = datos;
+---
+
+<section class="destinations">
+  <div class="main-title">
+    <h2>01 PICK YOUR DESTINATIONS</h2>
+  </div>
+
+  {
+    destinations.map(
+      ({ name, images, description, distance, travel }, index) => (
+        <div class="planet-container" id={name} hidden={index !== 0}>
+          <div class="left-side">
+            <div class="planet-image">
+              <img src={images.webp} alt={name} />
+            </div>
+          </div>
+
+          <div class="left-rigth">
+            <nav>
+              <DostPaginations />
+            </nav>
+
+            <article class="article">
+              <h1>{name.toUpperCase()}</h1>
+              <p>{description}</p>
+
+              <span class="divider" />
+
+              <div class="stats-container">
+                <div class="distance">
+                  <h3>AVG. DISTANCE</h3>
+                  <p>{distance}</p>
+                </div>
+                <div class="travel">
+                  <h3>EST. TRAVEL TIME</h3>
+                  <p>{travel}</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      )
+    )
+  }
+</section>
+
+<style>
+  /* Tus estilos base */
+  .destinations {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  /* Estilo para el título estático */
+  .main-title h2 {
+    font-family: var(--font-secondary);
+    font-weight: normal;
+    letter-spacing: 2.4px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  /* El contenedor del planeta se encarga de centrar la imagen */
+  .planet-image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .planet-image img {
+    width: 170px;
+    height: auto;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+
+  /* ... resto de tus fuentes y estilos ... */
+  .article h1 {
+    font-family: var(--font-primary);
+    font-size: var(--font-primary-3);
+  }
+  .article p {
+    font-family: var(--font-third);
+    line-height: 180%;
+  }
+
+  .divider {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: var(--color-white);
+    opacity: 0.25;
+    margin: 10px 0;
+  }
+
+  .stats-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .stats-container .distance h3,
+  .stats-container .travel h3 {
+    font-family: var(--font-secondary);
+    font-size: 14px;
+    line-height: normal;
+    letter-spacing: 2px;
+  }
+
+  .stats-container .distance p,
+  .stats-container .travel p {
+    font-family: var(--font-primary);
+    text-transform: uppercase;
+    font-size: var(--font-secondary-1);
+  }
+
+  /* CSS para ocultar/mostrar */
+  .planet-container[hidden] {
+    display: none;
+  }
+
+  /* Animación suave (Opcional) */
+  .planet-container:not([hidden]) {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .destinations {
+      padding: 40px;
+    }
+    .main-title h2 {
+      text-align: start;
+    }
+
+    .planet-image img {
+      width: 300px;
+      height: auto;
+    }
+
+    .planet-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .article {
+      max-width: 514px;
+    }
+    .article h1 {
+      font-size: 80px;
+    }
+
+    .article p {
+      max-width:;
+    }
+
+    .stats-container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .planet-container {
+      display: flex;
+      flex-direction: row;
+      gap: 80px;
+      align-items: center;
+      min-width: 445px;
+      min-width: 1110px;
+    }
+
+    .planet-image img {
+      width: 480px;
+      height: auto;
+    }
+
+    .planet-container .left-rigth {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: start;
+      min-width: 445px;
+    }
+    .planet-container .left-rigth .article {
+      align-items: start;
+      max-width: 445px;
+    }
+
+    .planet-container .left-rigth .article h1 {
+      font-size: 96px;
+      text-align: start;
+    }
+
+    .planet-container .left-rigth .article p {
+      font-size: var(--font-trird-1);
+      text-align: start;
+    }
+
+    .stats-container {
+      justify-content: start;
+      gap: 100px;
+    }
+
+    .stats-container .distance h3,
+    .stats-container .travel h3 {
+      font-size: 14px !important;
+      text-align: start;
+    }
+    .stats-container .distance p,
+    .stats-container .travel p {
+      font-size: 28px !important;
+      text-align: start;
+    }
+  }
+</style>
+
+<script>
+  // ==========================================
+  // 1. SELECCIÓN DE ELEMENTOS (El "Setup")
+  // ==========================================
+
+  // Seleccionamos todos los enlaces del menú (botones de Moon, Mars, etc.)
+  const links = document.querySelectorAll(".nav-link");
+
+  // Seleccionamos los contenedores padres de cada planeta (que tienen el ID="Moon", etc.)
+  // IMPORTANTE: Usamos 'as NodeListOf<HTMLElement>' para que TypeScript sepa
+  // que estos elementos tienen propiedades HTML estándar como '.hidden' o '.style'.
+  const planetContainers = document.querySelectorAll(
+    ".planet-container"
+  ) as NodeListOf<HTMLElement>;
+
+  // ==========================================
+  // 2. LA LÓGICA (Escuchar los clics)
+  // ==========================================
+
+  // Recorremos cada botón para asignarle una tarea cuando le hagan clic
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      // A. EVITAR COMPORTAMIENTO POR DEFECTO
+      // Evitamos que el <a> recargue la página o haga un salto brusco al ancla.
+      e.preventDefault();
+
+      // B. SEGURIDAD (El "Guardia")
+      // Intentamos obtener el destino (ej: "#Moon").
+      const href = link.getAttribute("href");
+
+      // Si por error el link no tiene href, detenemos la función aquí (return).
+      // Esto evita el error "Object is possibly null" y que la web colapse.
+      if (!href) return;
+
+      // ==========================================
+      // 3. ACTUALIZAR DISEÑO DEL MENÚ (Visual)
+      // ==========================================
+
+      // Primero: Limpiamos. Le quitamos la clase 'active' (la línea blanca) a TODOS los links.
+      links.forEach((l) => l.classList.remove("active"));
+
+      // Segundo: Marcamos el nuevo.
+      // TRUCO PRO: Como tu menú se repite 4 veces en el HTML (uno dentro de cada slide),
+      // no basta con activar el que se clickeó. Buscamos TODOS los enlaces que tengan
+      // el mismo texto (ej: todos los que digan "MARS") y los activamos.
+      links.forEach((l) => {
+        if (l.textContent === link.textContent) {
+          l.classList.add("active");
+        }
+      });
+
+      // ==========================================
+      // 4. CAMBIAR EL CONTENIDO (Funcionalidad)
+      // ==========================================
+
+      // Paso 1: "Resetear". Ocultamos TODOS los planetas primero.
+      // Usamos la propiedad nativa 'hidden' de HTML5.
+      planetContainers.forEach((container) => {
+        container.hidden = true;
+      });
+
+      // Paso 2: Calcular a cuál queremos ir.
+      // Tenemos href="#Moon", usamos substring(1) para quitar el "#" y que quede solo "Moon".
+      const targetId = href.substring(1);
+
+      // Paso 3: Buscar ese elemento en el HTML por su ID.
+      const targetContainer = document.getElementById(targetId);
+
+      // Paso 4: Si existe, lo mostramos.
+      if (targetContainer) {
+        targetContainer.hidden = false;
+      }
+    });
+  });
+</script>
