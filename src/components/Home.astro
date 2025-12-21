@@ -39,7 +39,6 @@ import ButtonNav from ".././components/Mobile/ButtonsMobile.astro";
     justify-content: center;
     text-align: center;
     max-width: 540px;
-    align-self: stretch;
     gap: 24px;
   }
 
@@ -66,5 +65,46 @@ import ButtonNav from ".././components/Mobile/ButtonsMobile.astro";
     font-style: normal;
     font-weight: 400;
     line-height: 27px; /* 27px */
+  }
+
+  @media (min-width: 768px) {
+    .hero h2 {
+      font-size: var(--font-secondary-1);
+    }
+    .hero h1 {
+      font-size: var(--font-primary-1);
+    }
+    .hero p {
+      font-size: var(--font-secondary-2);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container main {
+      flex-direction: row;
+      max-width: 1110px;
+      align-items: flex-end;
+      justify-content: space-betwen;
+      align-self: stretch;
+    }
+
+    .hero {
+      text-align: start;
+      align-items: start;
+    }
+
+    .hero h2 {
+      text-align: start;
+    }
+
+    .hero h1 {
+      text-align: start;
+    }
   }
 </style>

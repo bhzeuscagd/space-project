@@ -1,0 +1,63 @@
+---
+import datos from "../../assets/Data/data.json";
+
+const { destinations } = datos;
+const destino1 = destinations[0].name.toUpperCase();
+
+const destino2 = destinations[1].name.toUpperCase();
+
+const destino3 = destinations[2].name.toUpperCase();
+
+const destino4 = destinations[3].name.toUpperCase();
+---
+
+<div class="menu">
+  <ul>
+    <li><a href="#Moon" class="nav-link active"> {destino1} </a></li>
+    <li>
+      <a href="#Mars" class="nav-link"> {destino2}</a>
+    </li>
+    <li><a href="#Europa" class="nav-link"> {destino3}</a></li>
+    <li>
+      <a href="#Titan" class="nav-link"> {destino4}</a>
+    </li>
+  </ul>
+</div>
+
+<style>
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 40px 0;
+    width: -moz-available;
+  }
+  .menu ul {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: -moz-available;
+    justify-content: center;
+  }
+  .menu a {
+    text-decoration: none;
+    color: var(--color-white);
+    font-family: var(--font-secondary);
+    font-size: var(--font-secondary-3);
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 2.7px;
+    padding-bottom: 39px;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.3s ease-in-out;
+  }
+  .menu a.active {
+    border-bottom: 3px solid var(--color-white);
+  }
+
+  @media (min-width: 1024px) {
+    .menu a {
+      font-size: 16px;
+    }
+  }
+</style>

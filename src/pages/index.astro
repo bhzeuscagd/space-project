@@ -4,27 +4,62 @@ import Nav from "../components/Mobile/nav.astro";
 import Layout from "../layouts/Layout.astro";
 import Home from "../components/Home.astro";
 import backgroundMovil from ".././assets/home/background-home-mobile.jpg";
+import backgroundDesktop from "../assets/home/background-home-desktop.jpg";
+import ButtonsDesktop from "../components/Desktop/ButtonsDesktop.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-  <div class="container">
-    <Nav />
+  <div class="container-bg">
+    <div class="nav-mobile">
+      <Nav />
+    </div>
+    <div class="nav-desktop">
+      <ButtonsDesktop />
+    </div>
     <NaviationsMobile />
     <Home />
   </div>
 </Layout>
 
-<style define:vars={{ bgUrl: `url(${backgroundMovil.src})` }}>
-  .container {
+<style
+  define:vars={{
+    bgUrl: `url(${backgroundMovil.src})`,
+    bgUrl2: `url(${backgroundDesktop.src})`,
+  }}
+>
+  .container-bg {
     background-image: var(--bgUrl);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: 100dvh;
     z-index: -1;
+  }
+
+  /**Logica desaparece y aparece el menu en mobile */
+  @media (max-width: 768px) {
+    .nav-mobile {
+      display: block;
+    }
+    .nav-desktop {
+      display: none;
+    }
+  }
+  @media (min-width: 768px) {
+    .nav-mobile {
+      display: none;
+    }
+    .nav-desktop {
+      display: block;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-bg {
+      background-image: var(--bgUrl2) !important;
+    }
   }
 </style>
