@@ -1,0 +1,47 @@
+---
+import datos from "../assets/Data/data.json";
+
+const { technology } = datos;
+
+const cleanId = (name: string) => name.toLowerCase().replace(/\s+/g, "-");
+
+import TechnologyNavigations from "../components/TechnologyNavigations.astro";
+---
+
+<section class="crew">
+  <div class="main-title">
+    <h2>03 SPACE LAUNCH 101</h2>
+  </div>
+  {
+    technology.map(({ name, images, description }, index) => (
+      <div class="technology-container" id={cleanId(name)} hidden={index !== 0}>
+        <div class="content-left">
+          <img src={images.portrait} alt={name} />
+        </div>
+        <div class="content-rigth">
+          <div class="nav">
+            <TechnologyNavigations />
+          </div>
+          <div class="info">
+            <h2>THE TERMINOLOGY...</h2>
+            <h1>{name}</h1>
+            <p>{description}</p>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  .main-title h2 {
+    font-family: var(--font-secondary);
+    font-weight: normal;
+    letter-spacing: 2.4px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .content-left img {
+  }
+</style>

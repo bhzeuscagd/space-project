@@ -1,0 +1,58 @@
+---
+import datos from "../assets/Data/data.json";
+
+const { technology } = datos;
+const cleanId = (name: string) => name.toLowerCase().replace(/\s+/g, "-");
+---
+
+<div class="dot-indicadors">
+  <a
+    href={`#${cleanId(technology[0].name)}`}
+    class="dot active"
+    aria-selected="true"
+    data-index="0">1</a
+  >
+  <a
+    href={`#${cleanId(technology[1].name)}`}
+    class="dot"
+    aria-selected="false"
+    data-index="1=">2</a
+  >
+  <a
+    href={`#${cleanId(technology[2].name)}`}
+    class="dot"
+    aria-selected="false"
+    data-index="2">3</a
+  >
+</div>
+
+<style>
+  .dot-indicadors {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .dot {
+    cursor: pointer;
+    border-radius: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-size: 24px;
+    text-decoration: none;
+  }
+
+  .dot:hover {
+    background-color: var(--color-white);
+  }
+
+  .dot.active {
+    background-color: var(--color-white);
+    color: black;
+  }
+</style>
