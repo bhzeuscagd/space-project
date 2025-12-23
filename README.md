@@ -1,46 +1,59 @@
-# Astro Starter Kit: Basics
+# Space Travel (Astro)
+
+Sitio informativo inspirado en el reto “Space Tourism” de Frontend Mentor, construido con **Astro 5**. Incluye vistas para destinos, tripulación y tecnología, con navegación responsive para mobile, tablet y desktop.
+
+## Requisitos
+
+- Node 18+  
+- pnpm (recomendado)
+
+## Instalación y scripts
 
 ```sh
-pnpm create astro@latest -- --template basics
+pnpm install         # instala dependencias
+pnpm dev             # levanta el servidor en http://localhost:4321
+pnpm build           # genera la build estática en ./dist
+pnpm preview         # sirve la build para pruebas locales
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Estructura principal
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
+```
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+├── public/                # estáticos públicos (favicon, fuentes, imágenes)
+├── src/
+│   ├── assets/            # imágenes y data.json
+│   ├── components/        # UI reutilizable (navegación, secciones, etc.)
+│   ├── layouts/           # Layout.astro
+│   └── pages/             # rutas: index, destination, crew, technology
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Navegación y páginas
 
-## 🧞 Commands
+- `/` home: hero con botón “Explore” (mobile: apunta a `/destination`).
+- `/destination`: pestañas de destinos (Moon, Mars, Europa, Titan) cargadas desde `src/assets/Data/data.json`.
+- `/crew`: carrusel por dots para la tripulación.
+- `/technology`: conmutador por dots numerados (landscape/portrait según viewport).
+- Navegación:
+  - Mobile/Tablet: menú lateral (`NaviationsMobile.astro`) + barra superior con logo clicable a `/`.
+  - Desktop: barra superior con resalte activo (`ButtonsDesktop.astro`).
 
-All commands are run from the root of the project, from a terminal:
+## Datos y assets
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+El contenido (destinos, tripulación, tecnología) proviene de `src/assets/Data/data.json`; las imágenes viven bajo `src/assets/…` y se referencian directamente desde los componentes.
 
-## 👀 Want to learn more?
+## Estilos
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Variables y fuentes en `src/styles/global.css`.
+- Fondos responsivos por página (mobile/tablet/desktop) definidos en cada `.astro` de `src/pages`.
+
+## Accesibilidad y pequeñas notas
+
+- Enlaces de navegación incluyen números visibles y texto; se usan `aria-selected` en los dots.
+- Evitamos logs de debug en producción.
+
+## Deploy
+
+Al ser Astro estático, se puede publicar en Netlify, Vercel o GitHub Pages.  
+Comando de build: `pnpm build` → subir el contenido de `dist/`.
