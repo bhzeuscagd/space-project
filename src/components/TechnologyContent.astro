@@ -15,17 +15,19 @@ import TechnologyNavigations from "../components/TechnologyNavigations.astro";
   {
     technology.map(({ name, images, description }, index) => (
       <div class="technology-container" id={cleanId(name)} hidden={index !== 0}>
-        <div class="content-left">
-          <img src={images.portrait} alt={name} />
-        </div>
-        <div class="content-rigth">
-          <div class="nav">
-            <TechnologyNavigations />
+        <div class="main-container">
+          <div class="content-left">
+            <img src={images.portrait} alt={name} />
           </div>
-          <div class="info">
-            <h2>THE TERMINOLOGY...</h2>
-            <h1>{name}</h1>
-            <p>{description}</p>
+          <div class="content-rigth">
+            <div class="nav">
+              <TechnologyNavigations />
+            </div>
+            <div class="info">
+              <h2>THE TERMINOLOGY...</h2>
+              <h1>{name}</h1>
+              <p>{description}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -42,6 +44,209 @@ import TechnologyNavigations from "../components/TechnologyNavigations.astro";
     margin-bottom: 16px;
   }
 
+  .content-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 768px;
+    height: 278px;
+    max-height: 278px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 64px;
+  }
+
   .content-left img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    object-position: bottom;
+    display: block;
+    margin-bottom: 32px;
+  }
+
+  .content-rigth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    gap: 40px;
+    text-align: center;
+    padding: 24px;
+  }
+  .content-rigth .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .content-rigth .info h2 {
+    font-family: var(--font-primary);
+    font-size: var(--font-trird-1);
+    font-weight: 400;
+  }
+
+  .content-rigth .info h1 {
+    font-family: var(--font-primary);
+    font-size: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: normal;
+  }
+
+  .content-rigth .info p {
+    font-family: var(--font-third);
+    font-size: 15px;
+    line-height: 180%;
+    text-align: center;
+    font-style: normal;
+  }
+
+  @media (min-width: 768px) {
+    .main-title {
+      padding: 40px;
+    }
+    .main-title h2 {
+      font-size: 20px;
+      text-align: start;
+    }
+
+    .content-left {
+      max-height: 468px;
+      height: 468px;
+      max-width: 1440px;
+    }
+
+    .content-left img {
+      height: 406px;
+      width: 100%;
+      object-position: center;
+    }
+
+    .content-rigth {
+      margin-top: 0;
+      padding: 0 40px;
+    }
+
+    .content-rigth .info {
+      max-width: 512px;
+    }
+
+    .content-rigth .info h2 {
+      font-size: 24px;
+    }
+
+    .content-rigth .info h1 {
+      font-size: 40px;
+    }
+
+    .content-rigth .info p {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .main-container {
+      display: flex;
+      flex-direction: row-reverse;
+      max-width: 1275px;
+      margin-left: auto;
+    }
+
+    .main-title {
+      padding-left: 265px;
+    }
+
+    .content-left {
+      max-height: 683px;
+      height: 683px;
+      width: 608px;
+    }
+
+    .content-left img {
+      height: 600px;
+      width: 100%;
+      object-position: center;
+    }
+
+    .content-rigth {
+      flex-direction: row;
+      padding-left: 50px;
+    }
+
+    .content-rigth .info {
+      max-width: 640px;
+      align-items: start;
+    }
+
+    .content-rigth .info h2 {
+      font-size: 32px;
+    }
+
+    .content-rigth .info h1 {
+      font-size: 56px;
+    }
+
+    .content-rigth .info p {
+      font-size: 18px;
+      text-align: start;
+    }
   }
 </style>
+
+<script>
+  // seleccionamos los enlaces del dot
+
+  const links = document.querySelectorAll(".dot");
+
+  //seleccionamos los contenedores padres de cada profesional
+
+  const crewContainers = document.querySelectorAll(
+    ".technology-container"
+  ) as NodeListOf<HTMLElement>;
+
+  //escuchar los clics
+
+  //recorremos todos los botones y le asignamos los click
+
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      //evitar comportamiento por defecto
+
+      e.preventDefault();
+
+      //seguridad
+
+      const href = link.getAttribute("href");
+
+      if (!href) return;
+      //resetear
+      //actualizamos el menu
+      links.forEach((l) => l.classList.remove("active"));
+
+      //marcamos el nuevo
+      links.forEach((l) => {
+        if (l.getAttribute("href") === href) {
+          l.classList.add("active");
+        }
+      });
+
+      //cambiar el contenido
+      crewContainers.forEach((container) => {
+        container.hidden = true;
+      });
+
+      const targetId = href.substring(1);
+      console.log("Intentando abrir ID:", targetId); // Debug en consola
+
+      const targetContainer = document.getElementById(targetId);
+
+      if (targetContainer) {
+        targetContainer.hidden = false;
+      }
+    });
+  });
+</script>
