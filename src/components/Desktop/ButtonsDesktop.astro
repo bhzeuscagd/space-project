@@ -1,11 +1,12 @@
 ---
 const pathname = Astro.url.pathname;
+import logo from "../../assets/logo.svg";
 ---
 
 <header>
   <nav class="nav" aria-label="Desktop Navigation">
     <div class="logo">
-      <img src="/assets/logo.svg" alt="Logo" />
+      <img src={logo.src} alt="Logo" />
     </div>
     <div class="menu-desktop">
       <ul>

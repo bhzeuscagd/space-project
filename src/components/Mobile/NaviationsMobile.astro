@@ -1,11 +1,12 @@
 ---
 import Nav from "../Mobile/nav.astro";
+import closeIcon from "../../assets/close.svg";
 ---
 
 <nav class="nav">
   <div class="navigations" id="main-nav">
     <div class="close" id="close-btn">
-      <img src="/assets/close.svg" alt="Cerrar Menu" />
+      <img src={closeIcon.src} alt="Cerrar Menu" />
     </div>
     <div class="menu">
       <ul>
